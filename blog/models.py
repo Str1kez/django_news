@@ -1,0 +1,39 @@
+from django.db import models
+
+# Create your models here.
+from django.urls import reverse
+
+
+class Tag(models.Model):
+    title = models.CharField(max_length=50, blank=False, verbose_name='Название')
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        pass
+
+    class Meta:
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'
+
+
+class Article(models.Model):
+    title = models.CharField(max_length=255, blank=False, verbose_name='Заголовок')
+    content = models.TextField(blank=False, verbose_name='Текст')
+    image = models.ImageField(upload_to='images/%Y/%m/%d/', verbose_name='Изображение', blank=True)
+    author = models.CharField(max_length=255, blank=False, verbose_name='Автор')
+    created_at = models.DateTimeField(auto_now_add=True)
+    tags = models.ManyToManyField(Tag, 'tags')
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        pass
+
+    class Meta:
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
+        ordering = '-created_at',
