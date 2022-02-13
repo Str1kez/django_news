@@ -1,19 +1,35 @@
 from django.contrib import admin
 
 # Register your models here.
+from django import forms
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 from blog.models import Article, Tag
 
 
+class ArticleAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Article
+        fields = '__all__'
+
+
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = 'id', 'title', 'author', 'created_at', 'get_image'
+    form = ArticleAdminForm
+
+    list_display = 'id', 'title', 'slug', 'author', 'created_at', 'views', 'get_image'
     list_display_links = 'id', 'title'
     list_editable = 'author',
     list_filter = 'author', 'created_at'
     search_fields = 'title', 'author', 'created_at'
+    ordering = '-created_at', '-views'
     actions_on_top = True
-    ordering = '-created_at', 'title'
+
+    fields = 'title', 'slug', 'author', 'content', 'image', 'get_image', 'tags', 'views', 'created_at'
+    readonly_fields = 'get_image', 'created_at', 'views'
+    prepopulated_fields = {'slug': ('title', )}
 
     def get_image(self, obj):
         if obj.image:
@@ -22,5 +38,11 @@ class ArticleAdmin(admin.ModelAdmin):
     get_image.short_description = 'Картинка'
 
 
-admin.site.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = 'id', 'title', 'slug'
+    list_display_links = 'id', 'title'
+    prepopulated_fields = {'slug': ('title', )}
+
+
+admin.site.register(Tag, TagAdmin)
 admin.site.register(Article, ArticleAdmin)
