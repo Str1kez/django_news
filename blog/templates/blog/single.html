@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
 {% block content %}
 
     <div id="fh5co-title-box" style="background-image: url({{ article.image.url }}); background-position: 50%;" data-stellar-background-ratio="0.5">
@@ -15,9 +19,7 @@
         <div class="container paddding">
             <div class="row mx-0">
                 <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
-                    <p>
-                        <b>{{ article.content|safe }}</b>
-                    </p>
+                    <p>{{ article.content|safe }}</p>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla malesuada enim id enim congue
                         convallis. Praesent a cursus orci. Proin mauris eros, rhoncus in risus nec, vestibulum dignissim
@@ -64,7 +66,7 @@
                     <p>
                         Тэги:
                         {% for tag in tags %}
-                            <a href="#"> {{ tag }} </a>
+                            <a href="{% url 'blog:get_articles_by_tag' tag.slug %}"> {{ tag }} </a>
                         {% endfor %}
                     </p>
                 </div>

@@ -2,6 +2,6 @@
 {% get_tags as tags %}
 <div class="fh5co_tags_all">
     {% for tag in tags %}
-        <a href="#" class="fh5co_tagg">{{ tag.title }}</a>
+        <a href="{% url 'blog:get_articles_by_tag' tag.slug %}" class="fh5co_tagg">{{ tag.title }}</a>
     {% endfor %}
 </div>
