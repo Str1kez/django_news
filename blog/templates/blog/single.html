@@ -16,7 +16,7 @@
             <div class="row mx-0">
                 <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
                     <p>
-                        <b>{{ article.content }}</b>
+                        <b>{{ article.content|safe }}</b>
                     </p>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla malesuada enim id enim congue
@@ -61,6 +61,12 @@
                         ornare.
                     </p>
                     <p><b>Просмотров:</b> {{ article.views }}</p>
+                    <p>
+                        Тэги:
+                        {% for tag in tags %}
+                            <a href="#"> {{ tag }} </a>
+                        {% endfor %}
+                    </p>
                 </div>
                 <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
                     <div>
