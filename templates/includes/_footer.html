@@ -1,4 +1,6 @@
 {% load static %}
+{% load tags %}
+{% get_tags 5 as tags %}
 <div class="container-fluid fh5co_footer_bg pb-3">
     <div class="container animate-box">
         <div class="row">
@@ -28,14 +30,11 @@
             <div class="col-12 col-md-3 col-lg-2">
                 <div class="footer_main_title py-3"> Category</div>
                 <ul class="footer_menu">
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Business</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Entertainment</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Environment</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Health</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Life style</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Politics</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Technology</a></li>
-                    <li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; World</a></li>
+                    {% for tag in tags %}
+                        <li>
+                            <a href="{% url 'blog:get_articles_by_tag' tag.slug %}" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; {{ tag.title }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
             <div class="col-12 col-md-5 col-lg-3 position_footer_relative">

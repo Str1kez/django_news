@@ -1,5 +1,3 @@
-import datetime
-
 from django import template
 
 from blog.models import Tag
@@ -9,8 +7,8 @@ register = template.Library()
 
 
 @register.simple_tag
-def get_tags():
-    return Tag.objects.get_queryset()
+def get_tags(count: int=20):
+    return Tag.objects.get_queryset()[:count]
 
 
 @register.simple_tag()
