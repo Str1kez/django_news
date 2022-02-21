@@ -1,21 +1,45 @@
-<div class="row mx-0 animate-box" data-animate-effect="fadeInUp">
-    <div class="col-12 text-center pb-4 pt-4">
-        {% if page_obj.number > 3 %}
-            <a href="?page=1" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Start</a>
-        {% endif %}
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Previous</a>
-        {% endif %}
-        {% for page in page_obj.paginator.page_range %}
-            {% if page > page_obj.number|add:-3 and page < page_obj.number|add:3 %}
-                <a href="?page={{ page }}" class="btn_pagging">{{ page }}</a>
+{% if query %}
+        <div class="row mx-0 animate-box" data-animate-effect="fadeInUp">
+        <div class="col-12 text-center pb-4 pt-4">
+            {% if page_obj.number > 3 %}
+                <a href="?s={{ query }}&page=1" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Start</a>
             {% endif %}
-        {% endfor %}
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" class="btn_mange_pagging">Next <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
-        {% endif %}
-        {% if page_obj.number|add:2 < page_obj.paginator.num_pages %}
-            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn_mange_pagging">End <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
-        {% endif %}
-     </div>
-</div>
+            {% if page_obj.has_previous %}
+                <a href="?s={{ query }}&page={{ page_obj.previous_page_number }}" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Previous</a>
+            {% endif %}
+            {% for page in page_obj.paginator.page_range %}
+                {% if page > page_obj.number|add:-3 and page < page_obj.number|add:3 %}
+                    <a href="?s={{ query }}&page={{ page }}" class="btn_pagging">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?s={{ query }}&page={{ page_obj.next_page_number }}" class="btn_mange_pagging">Next <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
+            {% endif %}
+            {% if page_obj.number|add:2 < page_obj.paginator.num_pages %}
+                <a href="?s={{ query }}&page={{ page_obj.paginator.num_pages }}" class="btn_mange_pagging">End <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
+            {% endif %}
+         </div>
+    </div>
+{% else %}
+    <div class="row mx-0 animate-box" data-animate-effect="fadeInUp">
+        <div class="col-12 text-center pb-4 pt-4">
+            {% if page_obj.number > 3 %}
+                <a href="?page=1" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Start</a>
+            {% endif %}
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn_mange_pagging"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp; Previous</a>
+            {% endif %}
+            {% for page in page_obj.paginator.page_range %}
+                {% if page > page_obj.number|add:-3 and page < page_obj.number|add:3 %}
+                    <a href="?page={{ page }}" class="btn_pagging">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn_mange_pagging">Next <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
+            {% endif %}
+            {% if page_obj.number|add:2 < page_obj.paginator.num_pages %}
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn_mange_pagging">End <i class="fa fa-long-arrow-right"></i>&nbsp;&nbsp; </a>
+            {% endif %}
+         </div>
+    </div>
+{% endif %}

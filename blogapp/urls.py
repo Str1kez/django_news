@@ -23,6 +23,7 @@ from .settings import DEBUG
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
+    path('user/', include('user.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

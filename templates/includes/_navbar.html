@@ -8,7 +8,7 @@
                     aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
             <a class="navbar-brand" href="{% url 'blog:home' %}"><img src="{% static 'images/logo.png' %}" alt="img" class="mobile_logo_width"/></a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav" style="display: flex; width: 100%; justify-content: space-between;">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'blog:home' %}">Home <span class="sr-only">(current)</span></a>
                     </li>
@@ -18,27 +18,40 @@
                     <li class="nav-item ">
                         <a class="nav-link" href="single.html">Single <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">World <span class="sr-only">(current)</span></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                            <a class="dropdown-item" href="#">Action in</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton3" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Community<span class="sr-only">(current)</span></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
-                            <a class="dropdown-item" href="#">Action in</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="Contact_us.html">Contact <span class="sr-only">(current)</span></a>
-                    </li>
+{#                    <li class="nav-item dropdown">#}
+{#                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2" data-toggle="dropdown"#}
+{#                           aria-haspopup="true" aria-expanded="false">World <span class="sr-only">(current)</span></a>#}
+{#                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">#}
+{#                            <a class="dropdown-item" href="#">Action in</a>#}
+{#                            <a class="dropdown-item" href="#">Another action</a>#}
+{#                            <a class="dropdown-item" href="#">Something else here</a>#}
+{#                        </div>#}
+{#                    </li>#}
+{#                    <li class="nav-item dropdown">#}
+{#                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton3" data-toggle="dropdown"#}
+{#                           aria-haspopup="true" aria-expanded="false">Community<span class="sr-only">(current)</span></a>#}
+{#                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">#}
+{#                            <a class="dropdown-item" href="#">Action in</a>#}
+{#                            <a class="dropdown-item" href="#">Another action</a>#}
+{#                            <a class="dropdown-item" href="#">Something else here</a>#}
+{#                        </div>#}
+{#                    </li>#}
+                    <ul class="navbar-nav" style="display: flex;  justify-content: space-between;">
+                        <li class="nav-item ">
+                            {% if user.is_authenticated %}
+                                <a class="nav-link" href="{% url 'blog:home' %}">{{ user }} <span class="sr-only">(current)</span></a>
+                                {% else %}
+                                <a class="nav-link" href="{% url 'user:sign_up' %}">Sign Up <span class="sr-only">(current)</span></a>
+                            {% endif %}
+                        </li>
+                        <li class="nav-item ">
+                            {% if user.is_authenticated %}
+                                <a class="nav-link" href="{% url 'user:logout' %}">Logout <span class="sr-only">(current)</span></a>
+                                {% else %}
+                                <a class="nav-link" href="{% url 'user:sign_in' %}">Sign In <span class="sr-only">(current)</span></a>
+                            {% endif %}
+                        </li>
+                    </ul>
                 </ul>
             </div>
         </nav>

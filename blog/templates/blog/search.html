@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}
+    Поиск :: Новости от Ильича
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <form action="{% url 'blog:search' %}" method="get" style="width: 100%; height: 100%">
+                    <div class="col-12 py-3">
+                        <input type="text" name="s" class="form-control fh5co_contact_text_box" placeholder="Поиск..." />
+                    </div>
+                    <div class="col-12 py-3 text-center">
+                        <input type="submit" value="Искать" class="btn contact_btn"></input>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        <div class="container-fluid pb-4 pt-4 paddding">
+        <div class="container paddding">
+            <div class="row mx-0">
+                <div class="col-md-8 animate-box" data-animate-effect="fadeInLeft">
+                    {% for article in page_obj.object_list %}
+                        <div class="row pb-4">
+                            <div class="col-md-5">
+                                <div class="fh5co_hover_news_img">
+                                    <div class="fh5co_news_img">
+                                        <a href="{{ article.get_absolute_url }}">
+                                            <img src="{{ article.image.url }}" alt="" width="100%" height="100%"/>
+                                        </a>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 animate-box">
+                                <a href="{{ article.get_absolute_url }}" class="fh5co_magna py-2"> {{ article.title }} </a>
+                                <br>
+                                <p class="fh5co_mini_time py-3"> {{ article.author }} -
+                                {{ article.created_at }} </p>
+                                <div class="fh5co_consectetur">
+                                    {{ article.content|safe|truncatewords:20 }}
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center font-weight-bold" style="font-size: large">Ничего не найдено :(</div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% if page_obj.has_other_pages %}
+            {% include 'blog/includes/_pagination.html' %}
+        {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

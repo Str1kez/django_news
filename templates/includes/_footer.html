@@ -1,6 +1,6 @@
 {% load static %}
 {% load tags %}
-{% popular_posts as posts %}
+{% popular_posts 4 as posts %}
 {% article_tags as tags %}
 
 <div class="container-fluid fh5co_footer_bg pb-3">
@@ -34,7 +34,7 @@
                 <ul class="footer_menu">
                     {% for tag in tags|slice:'5' %}
                         <li>
-                            <a href="{% url 'blog:get_articles_by_tag' tag.slug %}" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; {{ tag.title }}</a>
+                            <a href="{{ tag.get_absolute_url }}" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; {{ tag.title }}</a>
                         </li>
                     {% endfor %}
                 </ul>

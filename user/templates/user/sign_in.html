@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid mb-4">
+    <div class="container">
+        <div class="col-12 text-center contact_margin_svnit ">
+            <div class="text-center fh5co_heading py-2">Sign In</div>
+        </div>
+        <div class="row flex-column align-items-center">
+            <div class="col-12 col-md-6">
+                <form method="post" class="col" id="fh5co_contact_form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="col-12 py-3 text-center"> <input type="submit" value="Login" class="btn contact_btn"></input> </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
