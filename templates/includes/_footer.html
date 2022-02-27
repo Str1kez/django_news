@@ -2,6 +2,7 @@
 {% load tags %}
 {% popular_posts 4 as posts %}
 {% article_tags as tags %}
+{% popular_users as creators %}
 
 <div class="container-fluid fh5co_footer_bg pb-3">
     <div class="container animate-box">
@@ -48,8 +49,10 @@
                 <div class="footer_position_absolute"><img src="{% static 'images/footer_sub_tipik.png' %}" alt="img" class="width_footer_sub_img"/></div>
             </div>
             <div class="col-12 col-md-12 col-lg-4 ">
-                <div class="footer_main_title py-3"> Last Created Posts</div>
-                <p>??</p>
+                <div class="footer_main_title py-3"> Popular Creators</div>
+                {% for creator in creators %}
+                    <a href="{% url 'blog:get_articles_by_user' creator.username %}">{{ creator.username }}</a>
+                {% endfor %}
             </div>
         </div>
         <div class="row justify-content-center pt-2 pb-4">

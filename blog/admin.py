@@ -19,15 +19,15 @@ class ArticleAdminForm(forms.ModelForm):
 class ArticleAdmin(admin.ModelAdmin):
     form = ArticleAdminForm
 
-    list_display = 'id', 'title', 'slug', 'author', 'created_at', 'views', 'get_image'
+    list_display = 'id', 'title', 'slug', 'author', 'user', 'created_at', 'views', 'get_image'
     list_display_links = 'id', 'title'
     list_editable = 'author',
-    list_filter = 'author', 'created_at'
+    list_filter = 'author', 'created_at', 'user'
     search_fields = 'title', 'author', 'created_at'
     ordering = '-created_at', '-views'
     actions_on_top = True
 
-    fields = 'title', 'slug', 'author', 'content', 'image', 'get_image', 'tags', 'views', 'created_at'
+    fields = 'title', 'slug', 'author', 'content', 'image', 'get_image', 'tags', 'views', 'created_at', 'user'
     readonly_fields = 'get_image', 'created_at', 'views'
     prepopulated_fields = {'slug': ('title', )}
 

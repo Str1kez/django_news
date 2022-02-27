@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Создание статьи :: Новости от Ильича
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-2">
+    <form method="post" enctype="multipart/form-data" style="display: flex; flex-direction: column">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <input class="btn contact_btn" type="submit" value="Опубликовать">
+    </form>
+    </div>
+{% endblock %}

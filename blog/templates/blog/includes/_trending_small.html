@@ -8,14 +8,16 @@
         </div>
         <div class="owl-carousel owl-theme" id="slider2">
             {% for post in posts %}
-                <div class="item px-2">
+                <div class="item px-2" >
+                    <a href="{% url 'blog:get_article' post.slug %}">
                     <div class="fh5co_hover_news_img">
-                        <div class="fh5co_news_img"><img src="{{ post.image.url }}" alt=""/></div>
+                        <div class="fh5co_news_img" ><img src="{{ post.image.url }}" alt="Не загрузилось" width="100%" height="100%"/></div>
                         <div>
-                            <a href="#" class="d-block fh5co_small_post_heading"><span class="">{{ post.title }}</span></a>
+                            <a href="{% url 'blog:get_article' post.slug %}" class="d-block fh5co_small_post_heading"><span class="">{{ post.title }}</span></a>
                             <div class="c_g"><i class="fa fa-clock-o"></i> {{ post.created_at }}</div>
                         </div>
                     </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>

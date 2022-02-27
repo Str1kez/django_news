@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.views.generic import CreateView
 
-from forms import CreateUserForm, AuthUserForm
+from .forms import CreateUserForm, AuthUserForm
 
 
 def sign_up(request):

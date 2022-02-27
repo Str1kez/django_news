@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class Tag(models.Model):
@@ -28,6 +29,7 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=50, verbose_name='Url', unique=True)
     tags = models.ManyToManyField(Tag, 'tags')
+    user = models.ForeignKey(User, on_delete=models.SET('Unknown'), verbose_name='Пользователь', default=1)
 
     def __str__(self):
         return self.title

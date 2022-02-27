@@ -1,5 +1,6 @@
 from django import template
 from django.db.models import Count
+from django.contrib.auth.models import User
 
 from blog.models import Tag, Article
 import datetime as dt
@@ -20,3 +21,9 @@ def header_date():
 @register.simple_tag
 def popular_posts(count: int = 5):
     return Article.objects.order_by('-views')[:count]
+
+
+@register.simple_tag
+def popular_users():
+    return User.objects.annotate(article_count=Count('article'))\
+               .filter(article_count__gt=0).order_by('-article_count')[:10]
