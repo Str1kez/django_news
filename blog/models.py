@@ -1,3 +1,4 @@
+from autoslug import AutoSlugField
 from django.db import models
 
 # Create your models here.
@@ -27,7 +28,7 @@ class Article(models.Model):
     views = models.IntegerField(verbose_name='Просмотры', default=0)
     author = models.CharField(max_length=255, blank=False, verbose_name='Автор')
     created_at = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(max_length=50, verbose_name='Url', unique=True)
+    slug = AutoSlugField(populate_from='title', max_length=50, verbose_name='Url', unique=True)
     tags = models.ManyToManyField(Tag, 'tags')
     user = models.ForeignKey(User, on_delete=models.SET('Unknown'), verbose_name='Пользователь', default=1)
 
