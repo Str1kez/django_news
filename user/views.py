@@ -17,7 +17,7 @@ def sign_up(request):
             messages.success(request, f'Вы вошли как {user}')
             return redirect('blog:home')
         else:
-            messages.error(request, 'Ошибка в регистрации')
+            messages.error(request, f'Ошибка в регистрации {form.errors}')
     form = CreateUserForm()
     return render(request, 'user/sign_up.html', {'form': form})
 
@@ -31,7 +31,7 @@ def sign_in(request):
             messages.success(request, f'Вы вошли как {user}')
             return redirect('blog:home')
         else:
-            messages.error(request, 'Ошибка в авторизации')
+            messages.error(request, f'Ошибка в авторизации {form.errors}')
     form = AuthUserForm()
     return render(request, 'user/sign_in.html', {'form': form})
 
