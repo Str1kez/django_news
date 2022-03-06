@@ -42,7 +42,7 @@
                 <div class="footer_main_title py-3"> Most Viewed Posts</div>
                 {% for post in posts|slice:'4' %}
                     <div class="footer_makes_sub_font"> {{ post.created_at }}</div>
-                    <a href="{% url 'blog:get_article' post.slug %}" class="footer_post pb-4"> {{ post.title }}</a>
+                    <a href="{% url 'blog:get_article' post.slug %}" class="footer_post pb-4"> {{ post.title|truncatechars:50 }}</a>
                 {% endfor %}
                 <div class="footer_position_absolute"><img src="{% static 'images/footer_sub_tipik.png' %}" alt="img" class="width_footer_sub_img"/></div>
             </div>

@@ -13,7 +13,7 @@
                     <div class="fh5co_hover_news_img">
                         <div class="fh5co_news_img" ><img src="{{ post.image.url }}" alt="Не загрузилось" width="100%" height="100%"/></div>
                         <div>
-                            <a href="{% url 'blog:get_article' post.slug %}" class="d-block fh5co_small_post_heading"><span class="">{{ post.title }}</span></a>
+                            <a href="{% url 'blog:get_article' post.slug %}" class="d-block fh5co_small_post_heading"><span class="">{{ post.title|truncatechars:50 }}</span></a>
                             <div class="c_g"><i class="fa fa-clock-o"></i> {{ post.created_at }}</div>
                         </div>
                     </div>

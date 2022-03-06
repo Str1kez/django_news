@@ -18,7 +18,7 @@
                 </a>
             </div>
             <div class="col-7 paddding">
-                <div class="most_fh5co_treding_font"><a href="{% url 'blog:get_article' post.slug %}">{{ post.title }}</a></div>
+                <div class="most_fh5co_treding_font"><a href="{% url 'blog:get_article' post.slug %}">{{ post.title|truncatechars:50 }}</a></div>
                 <div class="most_fh5co_treding_font_123"> {{ post.created_at }}</div>
             </div>
         </div>
