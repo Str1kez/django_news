@@ -26,12 +26,12 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('captcha/', include('captcha.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 if DEBUG:
     # на винде маймтайпы тупят
     import mimetypes
 
     mimetypes.add_type("application/javascript", ".js", True)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))

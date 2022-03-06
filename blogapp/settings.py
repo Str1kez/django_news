@@ -31,7 +31,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.3']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -43,10 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog.apps.BlogConfig',
     'captcha',
     'ckeditor',
     "debug_toolbar",
-    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
@@ -90,18 +90,12 @@ WSGI_APPLICATION = 'blogapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'django_db',
-        # 'USER': 'postgres',
-        # 'PASSWORD': '$pectruM0001',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'OPTIONS': {
-            'service': 'my_service',
-            # 'passfile': '.pgpass',
-        },
+        # 'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'OPTIONS': {
+        #     'service': 'my_service',
+        # },
     }
 }
 
@@ -111,8 +105,8 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/var/tmp/django_cache',
-        # 'LOCATION': 'd:/django_cache',
+        # 'LOCATION': '/var/tmp/django_cache',
+        'LOCATION': 'd:/django_cache',
     }
 }
 

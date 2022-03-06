@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    Поиск :: Новости от Ильича
+    Search :: Roflan Pominki
 {% endblock %}
 {% block content %}
     <div class="container-fluid">
@@ -8,10 +8,10 @@
             <div class="row">
                 <form action="{% url 'blog:search' %}" method="get" style="width: 100%; height: 100%">
                     <div class="col-12 py-3">
-                        <input type="text" name="s" class="form-control fh5co_contact_text_box" placeholder="Поиск..." />
+                        <input type="text" name="s" class="form-control fh5co_contact_text_box" placeholder="Search..." />
                     </div>
                     <div class="col-12 py-3 text-center">
-                        <input type="submit" value="Искать" class="btn contact_btn"></input>
+                        <input type="submit" value="Search" class="btn contact_btn"></input>
                     </div>
                 </form>
             </div>
