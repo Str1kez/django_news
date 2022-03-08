@@ -6,7 +6,7 @@
     <div class="row mx-0">
         {% for post in posts %}
             {% if forloop.first %}
-                <div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
+                <div class="col-md-6 col-12 paddding animate-box title_height" data-animate-effect="fadeIn">
                     <a href="{% url 'blog:get_article' post.slug %}">
                     <div class="fh5co_suceefh5co_height">
                         <img src="{{ post.image.url }}" width="100%" height="100%" alt="img"/>
@@ -22,7 +22,7 @@
                 <div class="col-md-6">
                     <div class="row">
             {% else %}
-                        <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                        <div class="col-md-6 col-6 paddding animate-box title_height" data-animate-effect="fadeIn">
                             <a href="{% url 'blog:get_article' post.slug %}">
                             <div class="fh5co_suceefh5co_height_2">
                                 <img src="{{ post.image.url }}" alt="img" width="100%" height="100%"/>

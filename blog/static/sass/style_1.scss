@@ -874,7 +874,8 @@ a, a:hover {
 			color: white;
 			font-weight: 300;
 			.single & {
-				font-size: 72px;
+				font-size: 5vh;
+				overflow-wrap: break-word;
 			}
 		}
 		> span {
