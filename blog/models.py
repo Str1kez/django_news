@@ -1,9 +1,10 @@
-from autoslug import AutoSlugField
 from django.db import models
 
 # Create your models here.
 from django.urls import reverse
 from django.contrib.auth.models import User
+
+from uuslug import uuslug
 
 
 class Tag(models.Model):
@@ -28,7 +29,7 @@ class Article(models.Model):
     views = models.IntegerField(verbose_name='Просмотры', default=0)
     author = models.CharField(max_length=255, blank=False, verbose_name='Автор')
     created_at = models.DateTimeField(auto_now_add=True)
-    slug = AutoSlugField(populate_from='title', max_length=50, verbose_name='Url', unique=True)
+    slug = models.SlugField(blank=False, max_length=50, verbose_name='Url', unique=True)
     tags = models.ManyToManyField(Tag, 'tags')
     user = models.ForeignKey(User, on_delete=models.SET('Unknown'), verbose_name='Пользователь', default=1)
 
@@ -37,6 +38,13 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:get_article', kwargs={'slug': self.slug})
+
+    def __unicode__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = uuslug(self.title, instance=self, max_length=50)
+        super(Article, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Статья'

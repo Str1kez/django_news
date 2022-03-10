@@ -21,7 +21,6 @@ from django.urls import path, include
 from .settings import DEBUG
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('user/', include('user.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
@@ -34,4 +33,5 @@ if DEBUG:
     import mimetypes
 
     mimetypes.add_type("application/javascript", ".js", True)
+    urlpatterns.append(path('admin/', admin.site.urls))
     urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))

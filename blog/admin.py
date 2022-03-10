@@ -28,7 +28,8 @@ class ArticleAdmin(admin.ModelAdmin):
     actions_on_top = True
 
     fields = 'title', 'slug', 'author', 'content', 'image', 'get_image', 'tags', 'views', 'created_at', 'user'
-    readonly_fields = 'get_image', 'created_at', 'views', 'slug'
+    readonly_fields = 'get_image', 'created_at', 'views'
+    prepopulated_fields = {'slug': ('title',)}
 
     def get_image(self, obj):
         if obj.image:
