@@ -43,8 +43,10 @@ class Article(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = uuslug(self.title, instance=self, max_length=50)
-        super(Article, self).save(*args, **kwargs)
+        update_fields = kwargs.get('update_fields')
+        if update_fields is None or len(update_fields) != 1 or 'views' not in update_fields:
+            self.slug = uuslug(self.title, instance=self, max_length=50)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Статья'

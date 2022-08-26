@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
-from random import randint
+from random import choice
 
 # Create your views here.
 from django.urls import reverse_lazy
@@ -36,8 +36,8 @@ def get_article(request, slug: str = None, article: Article = None):
     if not article:
         article = get_object_or_404(Article, slug=slug)
     article.views += 1
-    article.save()
-    
+    article.save(update_fields=['views'])
+
     tags = article.tags.all()
     return render(request, 'blog/single.html', {'article': article, 'tags': tags})
 
@@ -62,10 +62,12 @@ def get_articles_by_user(request, username: str):
 
 
 def get_random_article(request):
-    count = Article.objects.count()
-    id = randint(1, count)
-    article = get_object_or_404(Article, id=id)
-    return get_article(request, article=article)
+    # count = Article.objects.count()
+    articles = list(Article.objects.all())
+    # id = randint(1, count)
+    # article = get_object_or_404(Article, id=id)
+    return get_article(request, article=choice(articles))
+    # return get_article(request, article=article)
     # return redirect('blog:get_article', article.slug)
 
 

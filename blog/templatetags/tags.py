@@ -11,10 +11,7 @@ register = template.Library()
 
 @register.simple_tag
 def article_tags():
-    tags = cache.get('tags')
-    if not tags:
-        cache.set('tags', Tag.objects.annotate(article_count=Count('tags__id')).filter(article_count__gt=0)[:20])
-        return cache.get('tags')
+    tags = cache.get_or_set('tags', Tag.objects.annotate(article_count=Count('tags__id')).filter(article_count__gt=0)[:20])
     return tags
 
 
@@ -25,10 +22,7 @@ def header_date():
 
 @register.simple_tag
 def popular_posts():
-    posts = cache.get('posts')
-    if not posts:
-        cache.set('posts', Article.objects.order_by('-views')[:5])
-        return cache.get('posts')
+    posts = cache.get_or_set('posts', Article.objects.order_by('-views')[:5])
     return posts
 
 
@@ -36,4 +30,3 @@ def popular_posts():
 def popular_users():
     return User.objects.annotate(article_count=Count('article')).filter(article_count__gt=0)\
                     .order_by('-article_count')[:10]
-
